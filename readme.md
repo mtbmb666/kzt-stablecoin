@@ -1,1 +1,1 @@
-# Blockchain implemented on js
+# Blockchain implemented on js by @defiveninth
