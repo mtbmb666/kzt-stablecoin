@@ -1,4 +1,8 @@
 import Blockchain from './Blockchain'
+import Block from './Block'
 
-const myBlockchain = new Blockchain()
-console.log(myBlockchain)
+const KZTtChain = new Blockchain()
+
+KZTtChain.addBlock(new Block(1, '17-02-2025:23-30', { amount: 21_000_000 }))
+
+console.log(JSON.stringify(KZTtChain))

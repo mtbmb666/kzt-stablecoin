@@ -1,12 +1,5 @@
-import Block from './Block';
-class Blockchain {
-    chain;
-    constructor() {
-        this.chain = [this.createGenesisBlock()];
-    }
-    createGenesisBlock() {
-        return new Block(0, "2025-02-15", { amount: 0 }, "0");
-    }
-}
-const myBlockchain = new Blockchain();
-console.log(myBlockchain);
+import Blockchain from './Blockchain.js';
+import Block from './Block.js';
+const KZTtChain = new Blockchain();
+KZTtChain.addBlock(new Block(1, '17-02-2025:23-30', { amount: 21_000_000 }));
+console.log(JSON.stringify(KZTtChain, null, 4));
