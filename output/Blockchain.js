@@ -1,8 +1,10 @@
 import Block from './Block.js';
 class Blockchain {
     chain;
+    difficulty;
     constructor() {
         this.chain = [this.createGenesisBlock()];
+        this.difficulty = 5;
     }
     createGenesisBlock() {
         return new Block(0, "2025-02-15", "First Block On Network", "0");
@@ -12,7 +14,7 @@ class Blockchain {
     }
     addBlock(newBlock) {
         newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.hash = newBlock.calculateHash();
+        newBlock.mineBlock(this.difficulty);
         this.chain.push(newBlock);
     }
     isChainValid() {
