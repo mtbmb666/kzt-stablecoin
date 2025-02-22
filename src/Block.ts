@@ -1,16 +1,17 @@
 import pkg from "crypto-js"
+import Transaction from './Transaction'
 const { SHA256 } = pkg
 
 class Block {
-	timestamp: string
-	transactions: any
+	timestamp: number
+	transactions: Transaction[]
 	previousHash: string
 	hash: string
 	nonce: number
 
 	constructor(
-		timestamp: string,
-		transactions: any,
+		timestamp: number,
+		transactions: Transaction[],
 		previousHash = ''
 	) {
 		this.timestamp = timestamp
