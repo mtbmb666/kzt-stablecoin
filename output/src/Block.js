@@ -1,25 +1,22 @@
 import pkg from "crypto-js";
 const { SHA256 } = pkg;
 class Block {
-    index;
     timestamp;
-    data;
+    transactions;
     previousHash;
     hash;
     nonce;
-    constructor(index, timestamp, data, previousHash = '') {
-        this.index = index;
+    constructor(timestamp, transactions, previousHash = '') {
         this.timestamp = timestamp;
-        this.data = data;
+        this.transactions = transactions;
         this.previousHash = previousHash;
         this.hash = this.calculateHash();
         this.nonce = 0;
     }
     calculateHash() {
-        const hash = SHA256(this.index +
-            this.previousHash +
+        const hash = SHA256(this.previousHash +
             this.timestamp +
-            JSON.stringify(this.data) +
+            JSON.stringify(this.transactions) +
             this.nonce);
         return hash.toString();
     }

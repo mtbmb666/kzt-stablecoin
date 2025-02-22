@@ -14,7 +14,7 @@ class Blockchain {
 		this.miningReward = 100
 	}
 
-	createGenesisBlock(): Block {
+	private createGenesisBlock(): Block {
 		return new Block(Date.now(), [], "FIRSHHASH")
 	}
 
