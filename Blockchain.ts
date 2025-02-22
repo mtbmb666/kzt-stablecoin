@@ -10,7 +10,7 @@ class Blockchain {
 	}
 
 	createGenesisBlock(): Block {
-		return new Block(0, "2025-02-15", "First Block On Network", "0")
+		return new Block("2025-02-15", "First Block On Network", "FIRSHHASH")
 	}
 
 	getLatestBlock() {

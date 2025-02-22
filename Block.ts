@@ -2,22 +2,19 @@ import pkg from "crypto-js"
 const { SHA256 } = pkg
 
 class Block {
-	index: number
 	timestamp: string
-	data: any
+	transactions: any
 	previousHash: string
 	hash: string
 	nonce: number
 
 	constructor(
-		index: number,
 		timestamp: string,
-		data: any,
+		transactions: any,
 		previousHash = ''
 	) {
-		this.index = index
 		this.timestamp = timestamp
-		this.data = data
+		this.transactions = transactions
 		this.previousHash = previousHash
 		this.hash = this.calculateHash()
 		this.nonce = 0
@@ -25,10 +22,9 @@ class Block {
 
 	calculateHash(): string {
 		const hash = SHA256(
-			this.index +
 			this.previousHash +
 			this.timestamp +
-			JSON.stringify(this.data) +
+			JSON.stringify(this.transactions) +
 			this.nonce
 		)
 		return hash.toString()
