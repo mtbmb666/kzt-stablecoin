@@ -1,5 +1,5 @@
 import C from "crypto-js"
-import E from "elliptic"
+import E, { ec } from "elliptic"
 
 const { SHA256 } = C
 const EC = new E.ec("secp256k1")
@@ -37,6 +37,9 @@ class Transaction {
 		if (!this.signature || this.signature?.length === 0) {
 			throw new Error('No signature in this transaction!')
 		}
+
+		const publicKey = EC.keyFromPublic(this.fromAddress, 'hex')
+		return publicKey.verify(this.calculateHash(), this.signature)
 	}
 }
 
