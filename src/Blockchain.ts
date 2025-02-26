@@ -29,7 +29,7 @@ class Blockchain {
 		this.chain.push(block)
 
 		this.pendingTransactions = [
-			new Transaction('MININGREWARD', miningRewardAddress, this.miningReward)
+			new Transaction('null', miningRewardAddress, this.miningReward)
 		]
 	}
 
