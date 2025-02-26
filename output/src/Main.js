@@ -1,16 +1,8 @@
-import Blockchain from './Blockchain.js';
-import Transaction from './Transaction.js';
-const KZTtChain = new Blockchain();
-KZTtChain.createTransaction(new Transaction('a1', 'a2', 100));
-KZTtChain.createTransaction(new Transaction('a2', 'a1', 50));
-console.log("starting the mining");
-KZTtChain.minePendingTransactions('a3');
-console.log('a3 balance', KZTtChain.getBalanceOf('a3'));
-console.log('a1 balance', KZTtChain.getBalanceOf('a1'));
-console.log('a2 balance', KZTtChain.getBalanceOf('a2'));
-
-console.log('mining anothor one')
-KZTtChain.minePendingTransactions('a3')
-console.log('a3 balance', KZTtChain.getBalanceOf('a3'))
-
-console.log(KZTtChain.chain)
+import Blockchain from './Blockchain.js'
+import pkg from 'elliptic'
+const { ec } = pkg
+const E = new ec('secp256k1')
+const KZTtChain = new Blockchain()
+const myKey = E.keyFromPrivate('dd5b1f8ec04305bfedceef83a2f9d396c836e6f22fe53d4c1e14a25ce8a3e8e2')
+console.log(myKey.getPrivate('hex'))
+console.log(myKey.getPublic('hex'))

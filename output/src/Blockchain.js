@@ -17,22 +17,22 @@ class Blockchain {
     getLatestBlock() {
         return this.chain[this.chain.length - 1];
     }
-    // addBlock(newBlock: Block) {
-    // 	newBlock.previousHash = this.getLatestBlock().hash
-    // 	// newBlock.hash = newBlock.calculateHash()
-    // 	newBlock.mineBlock(this.difficulty)
-    // 	this.chain.push(newBlock)
-    // }
     minePendingTransactions(miningRewardAddress) {
-        let block = new Block(Date.now(), this.pendingTransactions);
+        let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
         block.mineBlock(this.difficulty);
         console.log('Block successfully mined');
         this.chain.push(block);
         this.pendingTransactions = [
-            new Transaction('MININGREWARD', miningRewardAddress, this.miningReward)
+            new Transaction('null', miningRewardAddress, this.miningReward)
         ];
     }
-    createTransaction(transaction) {
+    addTransaction(transaction) {
+        if (!transaction.fromAddress || !transaction.toAddress) {
+            throw new Error('Transaction must include from and to address');
+        }
+        if (!transaction.isValid()) {
+            throw new Error('Cannot add invalid transaction to chain');
+        }
         this.pendingTransactions.push(transaction);
     }
     getBalanceOf(address) {
@@ -53,6 +53,9 @@ class Blockchain {
         for (let i = 1; i < this.chain.length; i++) {
             const currentBlock = this.chain[i];
             const previousBlock = this.chain[i - 1];
+            if (!currentBlock.hasValidTransaction()) {
+                return false;
+            }
             if (currentBlock.hash !== currentBlock.calculateHash()) {
                 return false;
             }

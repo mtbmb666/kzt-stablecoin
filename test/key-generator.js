@@ -1,7 +1,5 @@
 import { ec } from 'elliptic'
-
 const E = new ec('secp256k1')
-
 const key = E.genKeyPair()
 
 const publicKey = key.getPublic('hex')
