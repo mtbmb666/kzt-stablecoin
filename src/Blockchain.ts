@@ -22,15 +22,8 @@ class Blockchain {
 		return this.chain[this.chain.length - 1]
 	}
 
-	// addBlock(newBlock: Block) {
-	// 	newBlock.previousHash = this.getLatestBlock().hash
-	// 	// newBlock.hash = newBlock.calculateHash()
-	// 	newBlock.mineBlock(this.difficulty)
-	// 	this.chain.push(newBlock)
-	// }
-
 	minePendingTransactions(miningRewardAddress: string) {
-		let block = new Block(Date.now(), this.pendingTransactions)
+		let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash)
 		block.mineBlock(this.difficulty)
 		console.log('Block successfully mined')
 		this.chain.push(block)
